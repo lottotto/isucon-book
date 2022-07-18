@@ -1,17 +1,18 @@
 #!/bin/bash
+source util.sh
 
 if [[ -z "${KEY_PATH}" ]]; then
-  echo "転送する秘密鍵のパス \${KEY_PATH} が空です。"
+  error "転送する秘密鍵のパス \${KEY_PATH} が空です。"
   exit 1
 fi
 
 if [[ -z "${GIT_URL}" ]]; then
-  echo "origin のURL \${GIT_URL} が空です。"
+  error "origin のURL \${GIT_URL} が空です。"
   exit 1
 fi
 
-echo KEY_PATH: ${KEY_PATH}
-echo GIT_URL: ${GIT_URL}
+info KEY_PATH: ${KEY_PATH}
+info GIT_URL: ${GIT_URL}
 
 read -p "ok? (y/N): " yn
 case "$yn" in
@@ -22,7 +23,7 @@ esac
 # git用 秘密鍵送付
 scp ${KEY_PATH} private-isu-app:~/
 KEY_PATH_FILENAME=$(basename ${KEY_PATH})
-echo KEY_PATH_FILE_NAME: ${KEY_PATH_FILENAME}
+info KEY_PATH_FILE_NAME: ${KEY_PATH_FILENAME}
 
 # git 準備
 ssh private-isu-app <<EOC
