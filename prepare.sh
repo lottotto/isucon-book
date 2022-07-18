@@ -40,6 +40,7 @@ git init
 git remote add origin ${GIT_URL}
 git pull origin main:main
 git checkout main
+git push --set-upstream origin main
 echo "===== Git トラッキング対象 =========="
 git ls-files
 EOC
