@@ -8,8 +8,13 @@ info "===== restart nginx =========="
 systemctl restart nginx
 
 info "===== logrotate nginx =========="
-cp -ap /var/log/nginx/access.log /var/log/nginx/access.log.$(date +%Y%m%d-%H%M%S)
-rm /var/log/nginx/access.log
-nginx -s reopen
+ACCESS_LOG="/var/log/nginx/access.log"
+if [[ -s "${ACCESS_LOG}" ]]
+    cp -ap ${ACCESS_LOG} ${ACCESS_LOG}.$(date +%Y%m%d-%H%M%S)
+    rm ${ACCESS_LOG}
+    nginx -s reopen
+else
+    info "${ACCESS_LOG} is 0 bytes. nothing to do."
+fi
 ls -al /var/log/nginx
 
