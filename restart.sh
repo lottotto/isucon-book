@@ -8,6 +8,6 @@ info "===== restart nginx =========="
 systemctl restart nginx
 
 info "===== logrotate nginx =========="
-logrotate -vf /etc/logrotate.d/nginx
+mv /var/log/nginx/access.log /var/log/nginx/access.log.$(date +%Y%m%d-%H%M%S)
 ls -al /var/log/nginx
 
