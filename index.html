@@ -1,0 +1,21 @@
+<script src="https://bossanova.uk/jspreadsheet/v4/jexcel.js"></script>
+<script src="https://jsuites.net/v4/jsuites.js"></script>
+<link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+<link rel="stylesheet" href="https://bossanova.uk/jspreadsheet/v4/jexcel.css" type="text/css" />
+<div id="spreadsheet"></div>
+
+<script>
+    var mySpreadsheet = jspreadsheet(document.getElementById('spreadsheet'), {
+        csv:'./test.csv',
+        csvHeaders:true,
+        tableOverflow:true,
+        columns: [
+            { type:'text', width:100 },
+            { type:'text', width:100 },
+        ]
+    });
+     
+    document.getElementById('download').onclick = function () {
+        mySpreadsheet.download();
+    }
+    </script>
