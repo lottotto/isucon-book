@@ -3,20 +3,59 @@
 <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
 <link rel="stylesheet" href="https://bossanova.uk/jspreadsheet/v4/jexcel.css" type="text/css" />
 <div id="spreadsheet"></div>
-
 <script>
+    var type;
+    var selectionActive = function(instance, x1, y1, x2, y2, origin) {
+        console.log(x1);
+        type = mySpreadsheet.options.columns[x1].type
+    }
+    var loaded = function(instance) {
+        type = mySpreadsheet.options.columns[0].type
+        mySpreadsheet.orderBy(0, 1)
+    }
     var mySpreadsheet = jspreadsheet(document.getElementById('spreadsheet'), {
         csv:'./test.csv',
         csvHeaders:true,
-        tableOverflow:true,
-        filter:true,
-        // columns: [
-        //     { type:'text', width:100 },
-        //     { type:'text', width:100 },
-        // ]
+        filters:true,
+        onselection: selectionActive,
+        onload:loaded,
+        columns: [
+            { type:'numeric', width:100 }, //count
+            { type:'numeric', width:100 }, //1xx
+            { type:'numeric', width:100 }, //2xx
+            { type:'numeric', width:100 }, //3xx
+            { type:'numeric', width:100 }, //4xx
+            { type:'numeric', width:100 }, //5xx
+            { type:'text', width:100 }, //method
+            { type:'text', width:200 }, //uri
+            { type:'numeric', width:100 }, //min
+            { type:'numeric', width:100 }, //max
+            { type:'numeric', width:100 }, //sum
+            { type:'numeric', width:100 }, //avg
+            { type:'numeric', width:100 }, //p90
+            { type:'numeric', width:100 }, //p95
+            { type:'numeric', width:100 }, //p99
+            { type:'numeric', width:100 }, //stddev
+            { type:'numeric', width:100 }, //min body
+            { type:'numeric', width:100 }, //max body
+            { type:'numeric', width:100 }, //sum body
+            { type:'numeric', width:100 }, //avg body
+        ],
+        sorting:function(direction) {
+                        return function(a, b) {
+                            if (type === 'numeric') {
+                                var valueA = new Number(a[1]);
+                                var valueB = new Number(b[1]);
+                            }else{
+                                var valueA = a[1];
+                                var valueB = b[1];
+                            }
+                            if (! direction) {
+                                return (valueA === '' && valueB !== '') ? 1 : (valueA !== '' && valueB === '') ? -1 : (valueA > valueB) ? 1 : (valueA < valueB) ? -1 :  0;
+                            } else {
+                                return (valueA === '' && valueB !== '') ? 1 : (valueA !== '' && valueB === '') ? -1 : (valueA > valueB) ? -1 : (valueA < valueB) ? 1 :  0;
+                            }
+                        }
+                    },
     });
-     
-    document.getElementById('download').onclick = function () {
-        mySpreadsheet.download();
-    }
     </script>
