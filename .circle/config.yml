@@ -1,9 +1,11 @@
-versions: 2.1
-
+version: 2.1
 jobs:
-  build: # name of your job
-    docker: # executor type
-      - image: cimg/base:stable # primary container will run the latest, production-ready base image
+  build:
+    docker:
+      - image: cimg/node:17.2.0 # ジョブのコマンドが実行されるプライマリ コンテナ
+        # auth:
+        #   username: mydockerhub-user
+        #   password: $DOCKERHUB_PASSWORD # コンテキスト/プロジェクト UI 環境変数を参照します
     steps:
-      # Commands run in the primary container
-      - echo "aa"
+      - checkout # プロジェクト ディレクトリ内のコードをチェックアウトします
+      - run: echo "hello world" # `echo` コマンドを実行します
