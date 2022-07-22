@@ -1,11 +1,7 @@
-version: 2.1
+version: 2
 jobs:
   build:
-    docker:
-      - image: cimg/node:17.2.0 # ジョブのコマンドが実行されるプライマリ コンテナ
-        # auth:
-        #   username: mydockerhub-user
-        #   password: $DOCKERHUB_PASSWORD # コンテキスト/プロジェクト UI 環境変数を参照します
+    machine: true
     steps:
-      - checkout # プロジェクト ディレクトリ内のコードをチェックアウトします
-      - run: echo "hello world" # `echo` コマンドを実行します
+      - checkout
+      - run: echo "aa"

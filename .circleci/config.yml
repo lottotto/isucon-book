@@ -1,0 +1,6 @@
+version: 2.1
+jobs:
+  build:
+    steps:
+      - checkout # プロジェクト ディレクトリ内のコードをチェックアウトします
+      - run: echo "hello world" # `echo` コマンドを実行します
