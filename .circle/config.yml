@@ -1,9 +1,9 @@
-version: 2.1
+versions: 2.1
 
 jobs:
-  nginx-validate:
-    machine:
-      image: ubuntu-2004:current
-    resource_class: medium
-    steps:
-      - run: echo "aaaa"
+  build: # name of your job
+    docker: # executor type
+      - image: cimg/base:stable # primary container will run the latest, production-ready base image
+      steps:
+        # Commands run in the primary container
+        - echo "aa"
