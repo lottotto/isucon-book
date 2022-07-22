@@ -1,0 +1,9 @@
+version: 2.1
+
+jobs:
+  nginx-validate:
+    machine:
+      image: ubuntu-2004:current
+    resource_class: medium
+    steps:
+      - run: echo "aaaa"
